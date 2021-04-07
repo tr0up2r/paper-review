@@ -5,6 +5,7 @@
 support 제공 메커니즘의 향상을 제공하고자 함.
 
 
+
 # INTRODUCTION
 Social support는 스트레스를 받거나 힘든 상황에 대해 buffer, 완충 작용을 제공해서 통제 불가능하고 감정적으로 파괴적이게 되는 상태를 회복할 수 있도록 돕는다. 그러나 치료적 맥락 밖에서, 몇몇 취약하고 연약한 사람들은 적절한 사회적 지원에 접근하기에 제한된 능력을 갖고 있다.
 Online mental health communities(OMHCs) – 오늘 날 mental health support에 중요한 자원으로 드러나고, 부상하고 있다. 이런 사이트들이 자살 충동을 줄이는 등 정신 건강 복지 향상에 꽤 많은 도움을 주고 있다. 
@@ -27,26 +28,6 @@ support seeker의 community norm(규범) 준수가 ES와 IS에 영향을 준다�
 
 ### Privacy, Ethics and Disclosure
 공개 데이터를 이용해 작업했지만, 개인 식별 정보는 포함하지 않았으며, user들의 개인 정보를 보호하기 위해 인용문은 paraphrased(다른 말로 바꾸어 인용)되었다.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -73,14 +54,6 @@ linguistic alignment
 
 
 
-
-
-
-
-
-
-
-
 # DATA
 ## Data Acquisition
 연구진은 공개적으로 접근이 가능한 Reddit(온라인 포럼으로 널리 쓰이는)의 데이터를 사용했다. 해당 플랫폼에서 registered user는 content를 text, link, image 등으로 공유한다. 이미 존재하는 post에 새로운 post를 작성하거나, comment를 달 수 있다. 이러한 게시물들은 discussion 주제에 따라 subreddit이라고 알려진 다양한 커뮤니티로 분류된다.
@@ -93,7 +66,6 @@ linguistic alignment
 358,409개의 post, 1,832,702개의 comment를 추출했음. (커뮤니티 당 6,516.53개의 post, 33,321.85개의 comment)
 RedditMetrics를 탐색한 결과, 커뮤니티는 다양한 규모에 걸쳐 있으며, 평균 subscriber 수는 132~189,922명에 이른다.
 
-
 ## Categories of Mental Health Communities
 dataset에 있는 많은 양의 community들을 고려하여(해볼 때), 후속 분석을 단순화하기 위해 그들(?)이 focus하는 광범위한 주제와 mental health issue들에 따라 그들을 분류했다. 이러한 분류를 하기 위해서 연구진은 two-step unsupervised learning based machine-human framework를 이용했다.
 1) human labeling은 의미론적으로 meaningful하고, 맥락적으로 관련 있는 community category들을 추출하는 데에 도움이 되지만 확장이 어렵고, 2) 클러스터링 기술은 scalable하지만, 그 자체로 OMHCs에게 의미있는 grouping을 제공하지 못할 수 있기 때문에 위의 방법을 채택한 것 같다.
@@ -103,12 +75,6 @@ k-means clustering algorithm을 이용하여 55개의 OMHCs에서 공유된 게�
 (2) Reddit의 OMHC에 친숙한 two annotator들은 독립적으로 machine-labeled cluster들을 정제하고, 알맞은 descriptive label을 클러스터들에 할당했다.  (semi-open coding approach를 이용) 이를 위해 subreddit landing pages들로부터 textual description들을 적극적으로 참조했고, 다양한 mental health condition들에 대한 개념적인 해석을 DSM-5로부터 차용했다. 
 그 결과, 그들은 5개의 mental health community 카테고리를 확인할 수 있었다.
 Trauma & Abuse / Psychosis & Anxiety / Compulsive Disorders / Coping & Therapy /     Mood Disorders
-
-
-
-
-
-
 
 
 
@@ -151,7 +117,6 @@ ES classifier는 평균 정확도 59%를 달성했는데, 이는 baseline accura
 (3) Self-Disclosure(자기폭로)  
 post의 자기폭로 정도 또한 social support를 포함한 community feedback에 영향을 준다. 이전 연구의 기술을 이용하여 dataset의 post에 있는 self-disclosure 양에 대한 실제 label을 얻고 model에 포함시켰다.
 
-
 (4) Author Tenure(재임 기간? community에 머문 기간?) and Familiarity  
 community의 norm에 대해 개인이 알고 있는 정도 또한 그들이 community로부터 받은 support에 영향을 준다. 연구진은 community knowledge를 두 가지 방법으로 정량화했다.
 첫째, 그들의 첫 번째 post(dataset에 있는)와 최근 post 사이의 timestamp 차이를 계산함으로써 커뮤니티 저자의 tenure를 알아낸다.
@@ -162,13 +127,6 @@ post 저자의 익명성은 social feedback과 support의 수준에 영향을 �
 
 (6) Size of the community  
 규모가 큰 community는 게시물에 더 많은 comment들을 불러일으켜, 관찰된 ES와 IS를 부풀릴 수 있기 때문에 community 가입자 수를 모델에 변수로 포함시켰다.
-
-
-
-
-
-
-
 
 
 
@@ -212,3 +170,45 @@ table 3을 이용해, 먼저 deviance metric을 기반으로 Control과 LSM mult
 마지막으로, 연구진은 IS와 ES에 대한 LSM 모델의 logistic regression coefficients를 제시한다. IS의 multinomial log odds of IS는 LSM 점수가 단위 증가(unit increase)할 때 1.75만큼 증가할 것으로 예상되며, LSM model의 control variable은 일정하게 유지된다. 다른 community category에서도 ES, IS에 대한 LSM model에서 유사한 pattern이 나타났다.
 Odds ratios는 coefficients의 exponentiation(지수화)이다. coefficient value의 odds ratio는 support score가 1일 때의 risk와 비교하여 2점, 또는 3점일 때의 support score의 risk가 LSM score 변화에 따라 어떻게 변화하는지를 나타낸다. 따라서, odds ratio가 1보다 크면 LSM이 증가할수록 support score가 1이 될 risk와 비교해 support score 2 또는 3이 될 risk가 증가함을 나타낸다. Table 4와 같이 IS와 ES에 대한 support score 2, 3의 odds ratios가 1보다 큰데, 이는 LSM score가 증가하면 post로부터 받은 support 정도가 증가한다는 것을 의미한다. 또한 5개 community category에서 IS의 경우 odds ratios가 ES의 경우보다 높다는 점에 주목했고, 이는 IS의 경우가 ES보다 LSM score가 증가했을 때 더 많은 support를 받을 가능성이 높다는 것을 의미한다. 
 예를 들어, Trauma & Abuse community의 경우, support score 3에 대한 relative odds ratios가 ES에서보다 IS에서 3.71(19.72 – 16.01)의 차이로 더 높다는 것을 발견했다. 반면, Compulsive Disorders community의 경우, support score 3에 대한 relative odds ratios는 IS가 ES에 비해 10.17(16.35 – 6.18)만큼 낮다. 이는 linguistic accommodation이 증가함에 따라, 주로 높은 ES를 제공하는 Trauma & Abuse community에서 높은 IS를 받는 것이 더 쉬워진다는 것을 의미한다. 반면에, 높은 IS를 제공하는 Compulsive Disorders commuinty에서는 높은 ES를 받는 것이 쉬워진다는 것을 의미한다.
+
+
+
+# DISCUSSION
+본 연구는 다양한 심리적 needs를 충족시키는 Reddit OHMCs의 social support와 linguistic accommodation을 조사하는 first insight 증 일부를 제공했다. 이러한 결론을 통해 이론 및 design(설계) 관점에서 이러한 community들에 대한 몇 가지 영향을 식별할 수 있다. 또한, 본 연구가 OMHCs의 운영에 어떤 영향을 줄지도 검토한다.
+
+## 이론적 시사점
+### Support Matching and Provisioning
+본 연구에서 주목할 만한 발견, 결과는 모든 community category가 상당한 ES와 IS를 제공하지만, 특정 커뮤니티가 더 많은 ES(e.g., Mood Disorder communities)를 지시, 제공하는 반면, 또 다른 커뮤니티는 더 많은 IS(e.g., Compulsive Disorder Communities)를 제공한다는 것이다. 이는 연구에 관련된 모든 community들이 mental health와 관련되어 있음에도 불구하고, 다른 social support goal을 충족시킨다는 것을 보여준다. 연구진의 결과는 social support가 multi-dimensional construct(다차원 구조)이며, 특정 유형의 support가 특정 요청과 match, 일치할 때 더욱 효과적일 수 있다고 주장하는 Optimal Matching Theory에서 검증을 찾는다(?).
+Cutrona와 Russell은 우울증과 같은 정신질환을 다스리는 데에 더 많은 ES가 필요할 수 있다는 것을 알아냈는데, 이는 r/depression 같은 subreddit에 걸친 Mood Disorder community가 더 많은 ES를 제공하는지 설명한다고 볼 수 있다. 반면, r/OCD와 같은 Compulsive Disorder(강박 장애) community의 poster는 그들의 condition, 상태에 대한 조언을 구하려고 하는 경향이 있기 때문에 IS가 그들의 post에 더 잘 어울린다고 볼 수 있다. 요약하자면, 이는 서로 다른 OMHCs의 support 제공이 특정 주제에 초점을 맞춘다는 것을 알 수 있다.
+
+### Conformance and Support
+본 연구에서 가장 주목할 만한 점은 ES든 IS든 OMHCs의 social support가 linguistic accommodation과 positive한 연관성이 있다는 것이다. 사회언어학 이론이 linguistic norms(언어 규범) 준수(conformance)와 social feedback 사이의 positive link의 존재가 mental health 주제에 응하는 online community에도 유효하다는 것을 발견했다. 이러한 community가 다루는 문제의stigmatized, sensitive한 특성을 고려할 때, community 전체가 허심탄회하게 털어놓기에 안전한 장소로 기능할 수 있도록 linguistic convention(규약)을 개발함과 동시에, 연약한 사람들 대한 support를 제공하게 된다. 이러한 community에서 support를 받기 위해 linguistic alignment가 필요한 것도 trust, rapport, empathy에 바탕을 둔 사회적 응집(결합) 관계의 확립과 유지를 도모하려는 의도가 있기 때문일 수도 있다. 이전 연구에서는 이러한 특성들이 OMHCs의 기본이 되어야 한다고 했으며, 이를 달성하기 위해 필수적인 규범적 규정 준수에 대해 언급했다.
+
+### The Tension Between Accommodation and Support
+ES와 IS가 OMHCs의 linguistic accommodation과 positive relationship을 가지고 있다는 이러한 발견은 community의 일관성 있는 정체성을 유지하기 위해서 support seeker들이 community norm을 준수하게 하도록 계속 고집할 것인지, 또는 취약점을 표현하는 개인에게 적시에 support를 지시하는 community의 목표를 유지하게 할 것인지 여부와 같은 tension을 표면화한다. 많은 media report들은 Reddit과 유사한 OMHCs들이 unique하고 urgent한 요구를 표현하는 고통받는 사람들을 돕는 능력에 대해 찬사를 보냈다. 하지만, r/suicide에서 두 게시물이 있었는데, 두 post 모두 자신의 needs에 대한 비슷한 immediacy(즉각성)과 criticality(필요성)을 보였지만 한 쪽은 ES 2점, 한 쪽은 ES 1점을 받았다. ES 2점을 받은 post가 그렇지 않은 post보다 더 높은 accommodation을 보였던 것을 발견했다(0.73 versus 0.48).
+이러한 OMHCs에 대한 관찰은 다음과 같은 질문들을 제기한다 :
+linguistic alignment는 누군가가 self-injury risk와 같은 critical한 필요를 표현하면서도 도움을 받기 위해서라면 절대적으로 필요한 것일까?
+poster가 정말 즉각적인 도움을 받아야 하는 상황이더라도 norm을 제대로 따르지 않았다면 충분한 support를 받지 않아야 하는가? (오히려 정말 급박한 사람들은 말을 잘 정리해서 쓸 수 있는 여력이 없지 않을까… 하는 생각이 든다)
+이전 연구들에서 정신 질환을 앓고 있는 사람들이 social exchage를 하는 중 직면하는 어려움을 인정했다는 사실에 주목해야 한다. 사회적 영역(social realm)으로부터의 분리는 고통받고 있는 사람들의 속성으로 알려져있다. 삶에 대한 자율성과 통제력의 결여, 단어나 언어적 선택에 대한 의사 결정의 ‘마비(paralysis)’ 또한 anxiety와 같은 많은 mental illnesses와 연관되어 있다고 여겨진다.
+그렇기는 하지만, 연구진의 결과는 많은 support seeker들이 실제로 언어학적으로 OMHCs’ norm과 일치하도록 하고 있다는 것을 보여줬다. linguistic accommodation이 전체적인 community identity를 형성하고, 신뢰와 친밀감을 구축하는 데에 자체적인 이점을 가질 수 있다는 것도 인정한다. 하지만 linguistic norm의 준수를 암시적으로든 명시적으로든 요구(requirement), 요건으로 만드는 것은 OMHCs의 광범위한 목적과 모순될 수 있다고 주장한다. 
+대신, norm을 제대로 따르지 않은 support seeker가 기본 norm에 대한 명확한 인식을 얻도록 해주거나, support provider가 심각한, 중요한 심리적 needs를 가진 사람에게 쉽게 도움을 줄 수 있는 더 나은 방식을 제공함으로써 해당 platform을 더 좋게 만들 수 있을 것이다.
+
+## 설계적 시사점
+OMHCs가 non-linguistically aligning support seeker들의 needs 또한 충족할 수 있는 방법은 무엇?
+
+### Influencing Community Design
+현재 reddit을 포함한 많은 social media platform은 community(subreddit)들이 그들만의 rule과 guideline을 강조할 수 있도록 하는 설계 여건(design affordances)이 포함되어 있다. 예를 들어, subreddit의 landing page의 sidebar pane(창)은 OMHCs에서 member들에게 해당 community의 목적을 알리고, community에서 공유할 수 있는 컨텐츠의 유형을 알리는 데에 종종 사용된다. 하지만 이런 것들은 이미 critical하고 distressful한 상황을 겪고 있는 support seeker이 특정 community에서 줄 수 있는 ES와 IS의 quality와 연관된 특정한 normative behavior들을 식별해내기에 간단한 방법이 아닐 수 있다. 
+따라서 연구진은 community designer들이 OMHCs의 norm, 표준을 보다 명확히 하고, interface 설계 시, community의 언어 스타일에 대한 잠재적인 학습을 할 수 있도록 하여 더 많은 support를 받을 기회를 얻을 수 있게 함을 제안한다. 연구진은 높은 linguistic accommodation과 높은 ES, IS를 모두 가진 historical post들을 식별하기 위한 향상된 statistical model(통계 모델)을 구현할 것을 제안한다. 그러고 나서 side pane이나 subreddit page의 community guideline이나 FAQ 내에 위와 같이 식별된 post들을 포함한다. 또 다른 방안으로는 community의 landing page 상단에 이러한 예시 post들을 promote할 수도 있다. Reddit에서 ‘sticky comments’라고 알려진 기능을 이용하면 된다. 이러한 post들은 점점 발전하는 OMHCs의 norm을 반영할 수 있도록 주기적으로 update될 수 있다.
+
+### Assisting Support Providers
+본 연구 결과에서 linguistic style이 community와 잘 맞지 않는 poster는 상대적으로 적은 support를 받을 가능성이 있다는 것을 암시했었다. 하지만 r/sucidewatch와 같은 subreddit에서는 poster에 대한 support와 관심이 urgent, 시급한 상황이 발생할 수 있다. 연구진은 이러한 경우엔 OMHC에서 적절한 social supporting을 받는데에 있어 필요한 암시적, 혹은 명시적 linguistic accommodation의 필요성을 무시(override)할 수 있는 설계 기능을 포함해야 한다고 생각한다. 이렇게 하기 위해서는 support provider가 본인들에게 들어오는 request의 흐름을 효율적이고 신속하게 탐색할 수 있도록 지원해야 한다.
+해결책으로, 개입(intervention) tool을 제안하여 본 논문에서 연구된 LSM approach로 평가된linguistic accommodation 수준이 낮고, support classifier로 검사했을 때 지금까지 거의 support를 받지 못한 게시물에 대해 moderator들, support provider들 에게 timely, 적시에 alert를 주도록 할 수 있다. 또한 경고의 폭주를 방지하기 위해, 개입 tool은 게시물 내용을 시각적으로 요약하거나, 대화형 인터페이스를 도입할 수 있다. post들은 topic과 시급성을 기반으로 분류된다. 
+
+## Limitations and Future Work
+먼저, ES와 IS에 대한 세 가지 support class들은 서로 미묘한 차이를 보일 가능성이 있으며, 연구진들의 classifier가 만족스러운 성능을 보였고, expert annotation들 사이에서도 동의가 잘 되었지만, classifier의 성능은 greater availability를 가진 labeled data로 인해 더 개선될 수 있다.
+또한 중요한 것은, OMHCs에서 공유된 post들이 적절한 support를 받는지에 영향을 미칠 수 있는 것은 linguistic accommodation 외에 여러 요인이 있을 수 있다는 것이다. 통계 모델에서 그러한 여러 요소를 식별하고, control 해서 community에서 linguistic accommodation과 support 사이의 positive link를 발견했으나, 이것이 본질적으로 인과 관계를 지니는지에 대해서는 확신할 수 없고, 이런 해석을 할 때는 주의를 해야 한다.
+
+
+
+# CONCLUSION
+본 논문에서는 online mental health communities에서 linguistic accommodation과 social support 사이의 relationship을 조사하는 포괄적인 연구를 제시하였다. 다양한 mental health topic에 초점을 맞춘 55개의 Reddit community로 구성된 대규모 dataset을 사용했다. 먼저, 이러한 community들에서 공유되는 post로부터 받은 두 가지 유형의 social support(emotional and informational)을 정량적으로 도출해냈다. 그리고 나서 심리학적 측정을 바탕으로 그 post들 사이에 나타난 linguistic accommodation을 측정했다. linguistic accommodation과 두 유형의 support 사이에 significant positive association이 있다는 것을 보여주었으며, 이는 연구진이 연구한 community들에 일관되었다. 본 작업들은 online support provisioning(제공) mechanism에 영향을 미칠 것으로 사료된다.
