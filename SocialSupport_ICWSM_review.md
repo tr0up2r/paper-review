@@ -40,3 +40,21 @@ Mental health 영역의 최근 meta-analysis에서는 online support가 depressi
 
 *Causality*  
 위에 언급한 연구는 online support가 health와 well-being의 증진에 잠재적으로 도움이 될 수 있는지 여부에 대한 귀중한 insight를 제공한다. 하지만 연구진은 미래의 건강 결과에 대한 influence를 정량화하고 측정하는 것 사이에 상당한 gap이 존재한다는 것에 주목한다. 이런 문제를 해결하기 위해 다른 연구진들은 유방암을 앓고 있는 사람들을 위한 online support community의 효과를 평가하는 clinical trials(임상 실험)를 수행했다. 12주 간 online support group인 BosomBuddies에 대한 접근 권한이 있는 그룹과 없는 그룹, 둘을 비교하는 연구를 진행했는데 접근했던 그룹 쪽이 depression(우울증), perceived stress, cancer-related trauma가 감소했다고 보고했다.  
+
+
+
+# Data
+## Identifying At-Risk Individuals  
+데이터 수집의 시작으로, 연구진은 Reddit의 mental health post dataset에 접근했다. 이 dataset은 14개의 mental health subreddit(**MH**)과 Reddit의 저명한 suicide support community(**SW**) 44,262명의 unique user들로부터 79,833개의 post들을 모은 것이고, 해당 데이터는 2014 February 11 ~ 2014 November 11 사이의 기간에 수집되었다. 이 모든 subreddit들은 public content를 제공하며, 이전 연구에서 mental health experts에 의해 mental health 및 suicidal ideation을 support하는 community라는 것이 examine(검사)되고 validate(검증)되었다.  
+De Choudhury 외 의 연구에서 개발된 방법에 따라 연구진은 두 가지의 user class를 구성했다.  
+
+첫 번째 - 자신의 mental health concern에 대해서 MH에 먼저(t1 time period) posting한 후, 나중에(t2 time period) SW에서 suicidal ideation에 대해 posting하는 것이 관찰된 user 집단을 식별했다.  
+두 번째 - t1 time period에 MH subreddit에 posting을 했지만, SW에서 t1 또는 t2에 posting한 것을 관찰할 수 없었던 두 번째 user 집단을 식별한다.  
+연구진은 선행 연구에서 그랬던 것처럼 t1을 Feb 11 2014 to Aug 11 2014 로 잡았고, t2를 Aug 12 2014 to Nov 11 2014로 잡았다. 전자(첫 번째 user set)는 미래에 suicidal ideation risk에 처하게 되는 집단으로, 본 논문에서는 *MH->SW*로 표기하며, 후자는 risk(위험)에 처하지 않은 user set으로, 본 논문에서 *MH*라고 분류했다. 이러한 approach를 이용해 440명의 *MH->SW* group user들을 파악해낼 수 있었다. *MH* user들의 경우 **propensity score matching** framework에 들어가는 class 크기의 균형을 맞추기 위해 t1 시간대와 t2 시간대에 SW에 posting한 적이 없는 28,831명의 user로부터 randomly sampling해서 *MH->SW* group과 동일한 수(440명)의 user를 얻었다. De Choudhury 외 의 연구에서 언급되었듯, *MH*의 28,831명의 user 중 일부는 dataset 수집 기간(t2) 이후에 SW에 posting 했을 수 있는 점을 주의해야 하지만 dataset의 large timespan이 파생된 class들의 purity에 충분한 confidence를 준다고 판단했다.  
+
+
+## Commentary Data
+본 논문의 목표는 social media에서 드러나는 social support가 사람들의 suicidal ideation risk에 대해 수행할 수 있는 role을 평가하는 것이다. 위에서 언급한 440명의 *MH->SW* user들과 440명의 *MH* user들의 Reddit post에 대한 comment들을 social support의 proxy로 간주한다. 위에 언급한 두 class의 880명의 user들 각각에 대한 post를 group화한 다음 공식 Reddit API를 이용해 각 post의 전체 comment thread(the last 1000 comments?)를 얻었다. 이렇게 수집한 comment thread에는 post에 달린 각 comment들의 내용(text), 각 comment의 author(username), 그리고 UTC(협정 세계 표준시)로 된 timestamp를 포함되어 있다.  
+*MH->SW* : 32,362명의 unique user들로부터 받은 62,024 comments.  
+*MH* : 21,358명의 unique user들로부터 받은 41,894 comments.  
+Figure 1은 두 user class들에 해당하는 comment data의 descriptive statistics를 제공하고 있다.  
