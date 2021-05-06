@@ -8,7 +8,7 @@ Social support는 mental well-being을 개선시켜주는 중요한 요소이다
 
 **Social media platform들이 널리 채택됨에 따라, online community는 건강 문제를 가진 사람들이 help, advice, support를 찾는 주요 메커니즘(prime mechanism)으로 부상했다.** 이러한 community에서 받는 support는 건강 문제(health challenge)로부터의 회복과 긍정적인 행동 변화를 촉진하는 것을 포함하여 self-efficacy(자기 옹호?) 및 복지(well-being) 향상(health challenge로부터의 회복을 가능케 하는)과 관련이 있는 것으로 확인이 되었다.  
 
-Online support의 긍정적인 치료 역할에 대한 *cross-sectional study(횡단 연구)*에 주어진 증거에도 불구하고, 연구자들은 이 주장을 입증하기 위해 적절한 경험적 데이터가 아직 충분히 축적되지 않았다는 것을 인정한다. 결과적으로 online social support의 availability와 mental health 사이의 인과 관계를 확립하는 것은 어려울 수 있다. 이는 대부분의 연구가 regression, classification model과 같은 *retrospective procedures*를 채택하고 있지만, 초기 증상이 동일한 user들에 대한 subpopulation을 식별하는 것은 어렵기 때문이다. 또한, 특정 개인의 특성이 social support에 대한 접근과 위험에 처한 경향의 발생과 관련이 있을 수도 있다. 이러한 증상(symtom)과 특성(trait)은 종종 suicidal ideation(자살 충동)과 같은 well-being risk에 대한 최고의 예측 변수(predictor)이기 때문에, baseline condition에 대한 지식이 부족하면 social support와 at-risk states(위험 상태) 사이의 연관성(link)을 해석하는 데 혼란스러운 영향을 미칠 수 있다.  
+Online support의 긍정적인 치료 역할에 대한 *cross-sectional study(횡단 연구)*에 주어진 증거에도 불구하고, 연구자들은 이 주장을 입증하기 위해 적절한 경험적 데이터가 아직 충분히 축적되지 않았다는 것을 인정한다. 결과적으로 online social support의 availability와 mental health 사이의 인과 관계를 확립하는 것은 어려울 수 있다. 이는 대부분의 연구가 regression, classification model과 같은 *retrospective procedures*를 채택하고 있지만, 초기 증상이 동일한 user들에 대한 subpopulation을 식별하는 것은 어렵기 때문이다. 또한, 특정 개인의 특성이 social support에 대한 접근과 위험에 처한 경향의 발생과 관련이 있을 수도 있다. 이러한 증상(symptom)과 특성(trait)은 종종 suicidal ideation(자살 충동)과 같은 well-being risk에 대한 최고의 예측 변수(predictor)이기 때문에, baseline condition에 대한 지식이 부족하면 social support와 at-risk states(위험 상태) 사이의 연관성(link)을 해석하는 데 혼란스러운 영향을 미칠 수 있다.  
 
 Online support에 대한 cross-sectional study에서 validity(타당성)를 추가적으로 위협하는 요인은 distressed individual 사이의 social support의 retrospective measurement에서의 잠재적 편향이다. Online comuunity에 참여하는 질병이 생기기 전인 사람들의 group을 모집하기가 어렵기 때문에 문제가 가중된다.  
 
@@ -67,3 +67,60 @@ De Choudhury 외 의 연구에서 개발된 방법에 따라 연구진은 두 �
 *MH->SW* : 32,362명의 unique user들로부터 받은 62,024 comments.  
 *MH* : 21,358명의 unique user들로부터 받은 41,894 comments.  
 Figure 1은 두 user class들에 해당하는 comment data의 descriptive statistics를 제공하고 있다.  
+
+
+
+# Method
+Comment를 통해 social support를 받는 것이 개인의 suicidal ideation risk에(혹은 *MH->SW*에 속하게 될 가능성에) 어떻게 영향을 미치는지 연구하기 위해, 연구진은 결과에 대한 comment의 effect와 혼동할 수 있는 다른 요인을 분리하려고 한다. **Randomized controlled trial(RTC)**를 이용했는데, 물론 윤리적 혹은 현실적인 한계로 인해 RTC 시행이 항상 실현 가능한 것은 아니다. 그래서 본 논문에서는  
+
+
+## Terminology and Data Preparation
+연구진의 분석 단위는 개별 Reddit 사용자이며, 이 user들의 experience는 posts에 대한 다른 사용자의 comments뿐만 아니라 이들이 작성한 MH community의 posts로도 특징지어진다. 이러한 post와 comment를 타임스탬프된 언어 token 또는 n-grams(n = 2)의 사용자별 시퀀스로 특징으로 하며, 소문자 및 중지 단어가 제거된다. 분석 결과, 사용자의 타임라인에 나타나는 모든 comment token은 해당 사용자에 대한 treatment이다. 즉, user가 작성한 post에 해당 toekn이 포함된 comment를 받았으면, 일정한 treatment를 받았다고 하는 것이다. 주어진 treatment 이전에 발생하는 user timeline의 모든 posts와 comment token들은 **covariate(공변량)**으로 간주되며, user의 치료 효과 결과(user가 추후 *MH->SW*에 posting을 할 것인지, 그렇지 않을 것인지)에 대한 분석에서 혼동을 유발하는 요인으로 여겨진다.  
+
+
+## Stratified Propensity Score Analysis
+**Stratified Propensity Score Analysis**  
+estimated propensity는 사용자의 covariates(모든 이전 post와 comment token들)를 기반으로 user가 치료를 받을 가능성에 대한 machine-learnend function이다. 일단 연구진들의 방법으로 user를 계층화한 후, common support를 가진 계층들을 분석한다. 각 계층에서 treatment effect는 treatment group과 control group의 측정된 outcomes 간의 차이를 의미한다. 이는 *MH->SW*에 참여하는 treated user들의 비율과 control user들의 percentage 차이이다. 연구진은 propensity score estimation과 stratification(계층화)를 포함한 이러한 procedure를 각 target treatment token들에 대해서 반복 수행했다.  
+
+
+## Implementation
+Propensity score function은 **averaged perceptron learning algorithm**에 의해서 estimate된다. Estimation은 user의 timeline에 나타나는 binary vector를 기반으로 수행이 된다. Binary vector는 H = h1, ... hn으로 구성이 되어있는데 여기서 각 hi는 treatment token을 받기 이전에 user의 타임라인에 공유된 post 및 comment에 token i가 나타난 경우 해당 건에 대해서 1이고, 그렇지 않으면 0이다. 통계적 유의성에 대한 z-score와 카이 제곱 tests를 보고했다. MH community에서 10명 이상의 user의 timeline에서 발생하는 모든 n-gram token(11,278개)에 대해서 이 분석을 수행한다.  
+
+
+
+# Validating Comparability
+향후 user가 *MH->SW* 또는 *MH*에 속할 risk에 대한 comment의 영향을 평가할 때, 연구진의 계층화 된(stratified) 분석은 특정 comment를 받은 treatment group과 그렇지 않은 user들로 이루어진 control group 사이를 비교하고 있다. RCT와는 다르게 본 연구에서는 처리가 관찰되지 않은 covariate들과 독립적이라는 것을 보장하지 않는다. (machine learning 관점에서 잘못 표현된 연구진들의 covariate set과 무관함.) 이렇게 하면 confounded result가 초래될 수 있다. 따라서 stratified group이 정확하게 균형을 이루도록 보장하는 것은 user가 *MH->SW* 또는 *MH*에 있을 가능성과 같은 결과의 정확한 추정에 중요하다.  
+이 목표를 위해, 이 절에서는 **human judges**를 이용하여 treatment와 control group 사이의 comparability(또는 balance)를 질적으로 먼저 평가하는 접근법을 설명한다. Human judgement를 사용한 후, 두 group 사이의 sociolinguistic(사회 언어학의) 측정과 language model의 잠재적인 차이에 대해 정량적으로 측정한다. 이 두 접근 방식을 함께 사용하면 treatment group과 control group의 subpopluation을 식별하고, post의 comment에 영향을 받을 가능성이 높은 user를 제어할 수 있다.  
+
+
+## Qualitative Analysis of Balance
+연구진은 먼저 dataset에 있는 880명의 user의 MH posts와 comments에서 제안된 **propensity score matching technique**을 구현했다. 연구진은 통계적으로 유의한 치료 효과가 있는 token을 식별했다. Negative effect는 comment token을 받는 것이 *MH->SW*에 있을 가능성을 감소시켰다는 것을 의미하며, positive effect는 그 반대를 의미한다. 연구진은 150개의 most positive(or negative) z-score에 기반해 150개의 token을 randomly sampling 했다. 그 후, 각 strata(comment token 당)에 대해 treatment group에서 10명의 user, control group에서 10명의 user를 무작위로 선택한다. 이 user 각각에 대해 treatment token(control의 경우 placebo)을 받을 때까지 해당 user의 최근 post와 해당 post에 대한 모든 comment들을 선택한다.  
+
+다음으로는 위에서 생성된 post pair의 balance를 질적으로 추정하기 위해 two rater(an expert in social media data analysis for mental health and a mental health professional)를 고용했다. Rater에게 주어진 목표는 post pair에서 suicidal ideation의 risk marker를 식별하는 것이었는데, 이는 propensity score analysis에서는 관찰할 수 없을 수 있지만 suicidal ideation의 risk가 있는 사람의 행동 관찰(observations of behaviors)과 일치한다. Post pair에서 marker가 align된 경우, 특정 comment token과 strata가 균형을 이루도록 treatment, control group을 추론할 수 있다. 그렇지 않다면, 연구진은 initial propensity score matching analysis가 더 정확하게 균형 잡힌 treatment, control group을 식별하기 위해 추가적인 조정이 필요하다고 가정할 것이다.  
+
+이를 위해, rater들은 De Choudhury et al. 2016에서 개발된 **a codebook of suicidal ideation risk markers**을 활용하여 100개의 post pair의 random sample을 balanced(very similar : rating of 1) 또는 imbalanced(very dissimilar : rating of 0)으로 독립적으로 등급을 매겼다.  
+balance, imbalance 추정을 위해 200개의 post pair의 더 큰 표본에 rating을 하였고, 두 rater들 사이의 final agreement는 코헨's kappa 계수 0.81로 유사도가 높은 것으로 나타났다.  
+
+Post pair의 qualitative coding에서 흥미로운 pattern이 나타났다. Figure 3을 보면 알 수 있듯, 분포가 nearly mirror image이다. balance rating의 경우 higher propensity strata에 속하는 post pair 중에서 더 빈번한 경향이 있는 반면, imbalance rating의 경우, lower propensity strata에서 peak이다. 
+
+
+## Quantitative Analysis of Subpopulation Differences
+앞서서 언급된 balance analysis는 comment에서 token을 얻는 효과가 동일하지 않을 수 있음(not be homogeneous)을 보여주었다. 일부 user는 token을 얻을 때(low propensity strata) 거의 효과를 보지 못하는 반면, 다른 user는 큰 효과(higher propensity strata)를 볼 수 있다. 본질적으로, high propensity strata와 low에 속하는 subpopulations of users는 어떤 면에서 다른 것인가? 이는 서로 다른 characteristics(특성)를 가진 사용자가 향후 MH->SW에 있을 가능성에서 그들이 수신하는 comment에 나타나는 특정 token에 의해 영향을 덜 받을 수 있는지, 또는 어떻게 더 많이 받을 가능성이 있는지를 이해하기 위한 중요한 고려 사항(important consideration)이다. 이러한 질문에 답하고, qualitative(정성적) balance assessment에 더 많은 신빙성, 신뢰도를 주기 위해 다음과 같은 quantitative approach(정량적 접근법)를 채택했다. **LIWC 사전**을 이용하여 high propensity strata( > 3)와 low propensity strata(<= 3)의 두 subpopulation의 post에 존재하는 다양한 sociolinguistic 정도를 정량화한다. 이들을 각각 subpopulation H와 L로 부른다.  
+
+"Diff" 지표가 주어지는 것처럼 subpopulation 전체에 걸쳐 유의한 차이를 관찰한다. "Diff"는 subpopulation H의 mental health post에서 특정 측정 값과 L의 측정값 사이의 상대적 백분율 차이이다. Subpopulation H는 그들의 post에 눈에 띄게 낮은 anger, sadness, NA를 표현하는 경향이 있다. 또한 그들의 post는 낮은 inhibition(억제율)과 높은 cognitive processing(인지 처리)를 보여준다. 어휘 밀도 및 인식의 측정에서 볼 수 있듯, H는 그들의 context와 environment에 대한 더 많은 인식을 제시한다. 흥미롭게도, H는 그들의 건강과 일에 대해 더 많이 공유하고, 사회와 가족과 관련된 관심사에 대해 더 많이 토론하는 경향이 있다. L과 비교하여 H는 1인칭 단수 대명사(1st person singular pronouns) 사용에서 언급된 낮은 자기 집중 또는 자기 선입견을 보이는 경향이 있다. 반대로, post에서 2인칭 대명사와 3인칭 대명사 사용을 통해 대인관계에 초점을 더 맞추는 경향이 있다.  
+
+
+
+# Results
+## Propensity Score Analysis
+User가 작성한 post에 달린 comment에 의해 영향을 받을 가능성이 있는 reliably(신뢰할 수 있는) balanced strata(>3)를 식별하면 stratified propensity score algorithm를 조정하여 다른 계층은 무시한 다음, 나머지 strata에서 treatment와 control user들에 대한 최종 결과 효과(final outcome effect)를 계산한다. Well-balanced strata에서만 계산이 되기 때문에 local average treatment effect는 user population에 대한 적용 범위에서 제한적일 수밖에 없지만, 특정 comment token의 effect에 대해서 더 신뢰할 수 있는 추정치를 나타낸다. Table 5에서 *MH->SW* user와 *MH* user를 구별하는 데 가장 많은 negative or positive z score를 준 40개의 comment token을 보고한다. 각 token에 대하여, dataset의 absolute number of users(880명 중)가 그들의 comment들 중 token을 받은 경우(treatment count), comment에서 token을 얻은 것을 기반으로 추후 *MH->SW*에 속할 percent increase(local average treatment effect), ...  
+
+
+## Exploring Context of Use of Comment Tokens
+다음에는 위에서 식별된 significant comment tokens(negative or positive 40개)의 사용 상황을 살펴본다. 이 분석은 서로 다른 유형의 social support가 *MH->SW* 또는 *MH*에 있는 outcome과 어떻게 관련되는지 이해할 수 있도록 하기 위한 것이다.  
+Table 6에서 발췌한 comment는 향후 *MH->SW*에 있을 가능성에 큰 영향을 미치는 것으로 확인된 token이 어떤 방식으로 social support context에서 사용되는지를 이해하는 데 도움이 된다. 
+
+
+
+**Perceptron**  
+퍼셉트론은 초기 형태의 인공 신경망으로, 다수의 입력으로부터 하나의 결과를 내보내는 알고리즘이다. 각각의 입력값 x는 각각의 가중치 W와 함께 y라는 종착지에 전달이 된다. 가중치의 값이 크면 클수록 해당 입력 값이 중요하다는 것을 의미하는 것. 
