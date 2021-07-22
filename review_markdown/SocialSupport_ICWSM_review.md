@@ -82,6 +82,12 @@ Comment를 통해 social support를 받는 것이 개인의 suicidal ideation ri
 **Stratified Propensity Score Analysis**  
 estimated propensity는 사용자의 covariates(모든 이전 post와 comment token들)를 기반으로 user가 치료를 받을 가능성에 대한 machine-learnend function이다. 일단 연구진들의 방법으로 user를 계층화한 후, common support를 가진 계층들을 분석한다. 각 계층에서 treatment effect는 treatment group과 control group의 측정된 outcomes 간의 차이를 의미한다. 이는 *MH->SW*에 참여하는 treated user들의 비율과 control user들의 percentage 차이이다. 연구진은 propensity score estimation과 stratification(계층화)를 포함한 이러한 procedure를 각 target treatment token들에 대해서 반복 수행했다.  
 
+**Common support?**
+Common support는 treatment와 control의 strata가 충분한 수의 user들을 가질 것을 요구한다. Common support가 없는 strata는 보통 아주 높거나 아주 낮은 propensity strata이다. 이것의 의미론적인 해석은, common support가 없는 strata의 경우 treatment의 효과와 user의 treatment status를 미리 결정한 것으로 보이는 prior confounding factor의 효과를 구별할 수 없다.  
+
+
+일단 연구진들의 방법으로 user들을 stratify한 후, common support를 가진 strata들을 분석한다. 
+
 
 ## Implementation
 Propensity score function은 **averaged perceptron learning algorithm**에 의해서 estimate된다. Estimation은 user의 timeline에 나타나는 binary vector를 기반으로 수행이 된다. Binary vector는 H = h1, ... hn으로 구성이 되어있는데 여기서 각 hi는 treatment token을 받기 이전에 user의 타임라인에 공유된 post 및 comment에 token i가 나타난 경우 해당 건에 대해서 1이고, 그렇지 않으면 0이다. 통계적 유의성에 대한 z-score와 카이 제곱 tests를 보고했다. MH community에서 10명 이상의 user의 timeline에서 발생하는 모든 n-gram token(11,278개)에 대해서 이 분석을 수행한다.  
